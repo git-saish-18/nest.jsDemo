@@ -10,7 +10,6 @@ interface Profiledata {
 @Controller("/users")
 export class UserController {
 
-
     @Get("/getprofile")
     getProfile(@Req() req: Request): string {
         const name = req.body.Name;
