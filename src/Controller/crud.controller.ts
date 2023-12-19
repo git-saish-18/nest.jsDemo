@@ -1,5 +1,5 @@
 import { Body, Controller, Post, Get, Delete, Param, Put, Ip } from "@nestjs/common";
-import { UserDTO } from './dto/index'
+import { UserDTO } from '../dto/index'
 var userData = []
 @Controller("/usersection")
 export class CrudOperation {
