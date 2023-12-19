@@ -1,10 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from "@nestjs/common";
 import { EmployeeDTO } from "../dto/Employee.dto";
-import { EmployeeService } from '../Services/employee.service'
+import { EmployeeService } from "../service/employee.service"
 @Controller('/employeeSection')
 export class ServiceDemo {
 
-    constructor(private EmployeeService: EmployeeService) { }
+    // injecting dependency --> constructor injection
+    constructor(private EmployeeService: EmployeeService) {
+        console.log(this.EmployeeService)
+    }
+    // @Inject("EmployeeService")   //--> property injection
+    // private EmployeeService: EmployeeService;
 
     @Get('/getEmp')
     getUser() {

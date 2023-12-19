@@ -1,4 +1,4 @@
-import { Controller, Get, Head, Param, Post, Query, Req, Res, Headers, Body } from "@nestjs/common";
+import { Controller, Get, Head, Param, Post, Query, Req, Res, Headers, Body, Inject } from "@nestjs/common";
 import { Request, Response } from "express";
 
 interface Profiledata {
@@ -10,9 +10,14 @@ interface Profiledata {
 @Controller("/users")
 export class UserController {
 
+    constructor(@Inject("MaiIds") private MailIds: Record<string, any>) {
+
+    }
+
     @Get("/getprofile")
     getProfile(@Req() req: Request): string {
         const name = req.body.Name;
+        console.log(this.MailIds)
         return `I am Profile Endpoint ${name}`
     }
     @Post("/addprofile")

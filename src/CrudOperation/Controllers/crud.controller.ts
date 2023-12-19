@@ -1,16 +1,20 @@
-import { Body, Controller, Post, Get, Delete, Param, Put, Ip } from "@nestjs/common";
+import { Body, Controller, Post, Get, Delete, Param, Put, Ip, Inject } from "@nestjs/common";
 import { UserDTO } from '../dto/index'
 var userData = []
 @Controller("/usersection")
 export class CrudOperation {
 
 
+    constructor(@Inject('Db_Name') private dbName: string) {
+        console.log(this.dbName)
+    }
+
     // Post method
     @Post('/addUser')
     addUser(@Body() requestData: UserDTO) {
         userData.push(requestData);
         console.log("new user added", requestData)
-        return "user Created successfully";
+        return `user Created successfully`;
     }
 
     // get method
