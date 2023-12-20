@@ -23,7 +23,7 @@ export class ServiceDemo {
 
     // @UsePipes(ParseIntPipe)  //convert string into number
     @Put('/updateEmp/:id')
-    updateEmp(@Param("id") id: number, @Body() requestBody: EmployeeDTO) {
+    updateEmp(@Param("id", ParseIntPipe) id: number, @Body() requestBody: EmployeeDTO) {
         console.log(typeof id)
         return this.EmployeeService.updateEmp(+id, requestBody);
     };

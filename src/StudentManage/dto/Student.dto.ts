@@ -1,4 +1,6 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsNumber, IsString, Length } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsEmail, IsEnum, IsInt, IsNotEmpty, IsNumberString, IsString, Length } from 'class-validator';
+import { number } from 'zod';
 
 export class StudentSchema {
     @IsString()
@@ -8,9 +10,16 @@ export class StudentSchema {
 
     @IsEnum(['FY', 'SE', 'TE', "BE"], { message: "Class Should be belong to FY SE TE BE" })
     class: string;
-
-    @IsNumber()
+  
+    @IsInt()
+    @IsNotEmpty()
+    // @Type(() => number)
     Id: number;
+
+    @IsNotEmpty()
+    @IsNumberString()
+    @Length(10, 10, { message: "Phone number is should be 10 digit" })
+    PhoneNumber: string;
 
     @IsEmail()
     EmailId: string;

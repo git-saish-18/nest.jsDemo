@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException, ParseIntPipe } from "@nestjs/common";
 import { EmployeeDTO } from '../dto/Employee.dto'
 
 
@@ -20,7 +20,11 @@ export class EmployeeService {
         let empIdx = this.EmployeeData.indexOf(employee);
         console.log(empIdx)
         if (empIdx < 0) {
-            return "No record found"
+            // (msg , statuscode)
+            // throw new NotFoundException()
+            // throw new HttpException("Not found ", 404)
+            // throw new HttpException("Not found", HttpStatus.NOT_FOUND)
+            throw new BadRequestException()
         } else {
             this.EmployeeData[empIdx] = requestBody;
             return `Emp ${id} update successfully `;

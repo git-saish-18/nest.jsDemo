@@ -1,0 +1,1 @@
+{"msg":"User not found","statusCode":400,"error":"Not found","method":"GET","path":"/StudentSection/getStudentById"}
