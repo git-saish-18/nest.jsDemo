@@ -1,53 +1,45 @@
 import { Body, Controller, Post, Get, Delete, Param, Put, Ip, Inject } from "@nestjs/common";
 import { UserDTO } from '../dto/index'
+import { CrudOperationService } from "../Service/CrudOperation.service";
 var userData = []
 @Controller("/usersection")
 export class CrudOperation {
 
 
-    constructor(@Inject('Db_Name') private dbName: string) {
+
+    constructor(@Inject('Db_Name') private dbName: string, private CrudOperationService: CrudOperationService) {
         console.log(this.dbName)
     }
 
     // Post method
     @Post('/addUser')
     addUser(@Body() requestData: UserDTO) {
-        userData.push(requestData);
-        console.log("new user added", requestData)
-        return `user Created successfully`;
+        return this.CrudOperationService.addUser(requestData);
     }
 
     // get method
     @Get('/getallUser')
     getAllUser() {
-        console.log("alluser list ", userData)
-        return userData;
+        return this.CrudOperationService.getAllUser();
     }
 
     // delete method
     @Delete('/deletuser/:id')
-    deletuser(@Param('id') id: number) {
-
-        userData = userData.filter((ele) => { return ele.id !== +id })
-        return `user delete successfully of id ${id}`;
+    deletUser(@Param('id') id: number) {
+        return this.CrudOperationService.deleteUser(id);
     }
 
     // find user method
     @Get('/getuser/:id')
     getuserbyid(@Param('id') id: number) {
 
-        let user = userData.find(user => user.id === +id)
-        console.log("find users ", user)
-        return `user found ${id}`;
+        return this.CrudOperationService.getuserbyId(id);
     }
 
     // update user method
     @Put('/updateuser/:id')
     updateuserbyid(@Param('id') id: number, @Body() updateuser: UserDTO) {
-        let user = userData.find(user => user.id === +id)
-        let useridx = userData.indexOf(user);
-        userData[useridx] = updateuser;
-        return `user found ${userData}`;
+        return this.CrudOperationService.updateUserById(id, updateuser);
     }
 
     // getting Ip address

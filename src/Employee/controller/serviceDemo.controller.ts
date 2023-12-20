@@ -1,7 +1,7 @@
-import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpStatus, Inject, Param, ParseIntPipe, Post, Put, UsePipes } from "@nestjs/common";
 import { EmployeeDTO } from "../dto/Employee.dto";
 import { EmployeeService } from "../service/employee.service"
-@Controller('/employeeSection')
+@Controller('/')
 export class ServiceDemo {
 
     // injecting dependency --> constructor injection
@@ -15,16 +15,26 @@ export class ServiceDemo {
     getUser() {
         return this.EmployeeService.getUser();
     };
+
     @Post('/addEmp')
     addEmp(@Body() requestBody: EmployeeDTO) {
         return this.EmployeeService.addEmp(requestBody);
     };
+
+    // @UsePipes(ParseIntPipe)  //convert string into number
     @Put('/updateEmp/:id')
     updateEmp(@Param("id") id: number, @Body() requestBody: EmployeeDTO) {
+        console.log(typeof id)
         return this.EmployeeService.updateEmp(+id, requestBody);
     };
     @Delete('/deleteEmp/:id')
-    deleteEmp(@Param('id') id: number) {
-        return this.EmployeeService.deleteEmp(+id);
+    // ParseIntPipe use for data transformation  and validation convert any datatypes to number
+    // deleteEmp(@Param('id', ParseIntPipe) id: number) {
+    //     console.log(typeof id)
+    //     return this.EmployeeService.deleteEmp(id);
+    // };
+    deleteEmp(@Param('id', new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: number) {
+        console.log(typeof id)
+        return this.EmployeeService.deleteEmp(id);
     };
 }

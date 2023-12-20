@@ -27,7 +27,7 @@ export class EmployeeService {
         }
     };
     deleteEmp(id: number) {
-        this.EmployeeData = this.EmployeeData.filter((emp) => emp.id !== +id);
+        this.EmployeeData = this.EmployeeData.filter((emp) => emp.id !== id);
         return `Emp ${id} deleted successfully  `;
     };
 }

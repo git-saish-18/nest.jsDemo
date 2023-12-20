@@ -1,6 +1,7 @@
 import { Controller, Delete, Get, HttpCode, HttpStatus, Post, Put, Res, Header, Redirect, Inject } from "@nestjs/common";
 import { Response } from "express";
-@Controller("/albums")
+
+@Controller("/")
 export class AlbumController {
 
     constructor(@Inject("albumObj") private albumObj: object, @Inject('DbConnection') private connect: any) { }

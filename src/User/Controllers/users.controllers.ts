@@ -7,7 +7,7 @@ interface Profiledata {
 }
 
 
-@Controller("/users")
+@Controller("/")
 export class UserController {
 
     constructor(@Inject("MaiIds") private MailIds: Record<string, any>) {
