@@ -6,6 +6,7 @@ import { AlbumsModule } from './Albums/Albums.module';
 import { RouterModule } from '@nestjs/core';
 
 import { AllRoutes } from './app-route';
+import { StudentModule } from './StudentManage/student.module';
 const ROUTE = [{ path: 'users', module: UsersModule }, ...AllRoutes];
 
 @Module({
@@ -14,10 +15,12 @@ const ROUTE = [{ path: 'users', module: UsersModule }, ...AllRoutes];
     EmployeeModule,
     CrudOperationModule,
     AlbumsModule,
+    StudentModule,
     RouterModule.register(ROUTE),
+
   ],
   controllers: [],
   providers: [],
   exports: [],
 })
-export class AppModule {}
+export class AppModule { }

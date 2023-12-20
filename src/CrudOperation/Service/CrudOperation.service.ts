@@ -20,15 +20,18 @@ export class CrudOperationService {
         return `user delete successfully of id ${id}`;
     }
     @Get()
-    getuserbyId(id: number) {
-        let user = this.userData.find(user => user.id === +id)
-        if (!user) {
-            console.log("User not found")
-            return `user ${id} not found `;
-        } else {
-            console.log("find users ", user)
-            return `user ${id} found `;
-        }
+    getuserbyId(ids: number[]) {
+
+        ids.forEach((id) => {
+            let user = this.userData.find(user => user.id === id)
+            if (!user) {
+                console.log("User not found")
+                return `user ${id} not found `;
+            } else {
+                console.log("find users ", user)
+                return `user ${id} found `;
+            }
+        })
 
     }
     @Put()

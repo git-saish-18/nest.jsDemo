@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get, Delete, Param, Put, Ip, Inject } from "@nestjs/common";
+import { Body, Controller, Post, Get, Delete, Param, Put, Ip, Inject, Query, ParseArrayPipe } from "@nestjs/common";
 import { UserDTO } from '../dto/index'
 import { CrudOperationService } from "../Service/CrudOperation.service";
 var userData = []
@@ -29,11 +29,19 @@ export class CrudOperation {
         return this.CrudOperationService.deleteUser(id);
     }
 
-    // find user method
-    @Get('/getuser/:id')
-    getuserbyid(@Param('id') id: number) {
+    // // find user method
+    // @Get('/getuser/:id')
+    // getuserbyid(@Param('id') id: number) {
 
-        return this.CrudOperationService.getuserbyId(id);
+    //     return this.CrudOperationService.getuserbyId(id);
+    // }
+
+    // find user method we use the ParseArrayPipe for to accept multiple Query parameters 
+    @Get('/getuser')
+    getuserbyid(@Query('id', new ParseArrayPipe({ items: Number, separator: "," })) ids: number[]) {
+
+        console.log(ids)
+        return this.CrudOperationService.getuserbyId(ids);
     }
 
     // update user method
