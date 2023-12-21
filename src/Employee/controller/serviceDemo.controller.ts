@@ -1,11 +1,13 @@
 import { Body, Controller, Delete, Get, HttpStatus, Inject, Param, ParseIntPipe, Post, Put, UsePipes } from "@nestjs/common";
 import { EmployeeDTO } from "../dto/Employee.dto";
 import { EmployeeService } from "../service/employee.service"
+import { ConfigService } from "@nestjs/config";
 @Controller('/')
 export class ServiceDemo {
 
     // injecting dependency --> constructor injection
-    constructor(private EmployeeService: EmployeeService) {
+    constructor(private EmployeeService: EmployeeService, private ConfigService: ConfigService) {
+        console.log("Access albums config in employee module", this.ConfigService.get('DataBaseAlbum'))
         console.log(this.EmployeeService)
     }
     // @Inject("EmployeeService")   //--> property injection

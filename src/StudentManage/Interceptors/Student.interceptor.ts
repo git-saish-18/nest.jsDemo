@@ -17,13 +17,14 @@ export class StudentInterceptor implements NestInterceptor {
         let bodymsg = {
             method: req.method,
             path: req.path,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            statusCode:res.statusCode,
         }
         // this.writeFiles(bodymsg);
         req.body.saish = "EndGamers";
         console.log("Start Game changes REQ")
         console.log(req.body)
-        // this.Catche.push(req.body)
+        this.Catche.push(req.body)
         // console.log(this.Catche)
         console.log(bodymsg)
         return next.handle().pipe(

@@ -1,4 +1,5 @@
 import { Controller, Get, Head, Param, Post, Query, Req, Res, Headers, Body, Inject } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { Request, Response } from "express";
 
 interface Profiledata {
@@ -7,11 +8,25 @@ interface Profiledata {
 }
 
 
+// we can validate the configure file with proper datatypes 
+interface JWT_Validation {
+    "JWT_SECREATE_KEY": string;
+    "JWT_EXPIRED_TIME": string;
+    "IsAuth": {
+        "flag": boolean
+    }
+}
+
 @Controller("/")
 export class UserController {
 
-    constructor(@Inject("MaiIds") private MailIds: Record<string, any>) {
+    constructor(@Inject("MaiIds") private MailIds: Record<string, any>, private Configservice: ConfigService<JWT_Validation>) {
+        // console.log("port number", this.Configservice.get('PORT_NO'))
 
+        // Access the data from config files 
+        const JWT = this.Configservice.get<JWT_Validation>("JWT_SECREATE_KEY")
+        const des = this.Configservice.get("IsAuth")
+        console.log("JWT_config", JWT, des.flag)
     }
 
     @Get("/getprofile")
