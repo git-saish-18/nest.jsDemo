@@ -31,7 +31,13 @@ export class EmployeeService {
         }
     };
     deleteEmp(id: number) {
+        let len = this.EmployeeData.length;
         this.EmployeeData = this.EmployeeData.filter((emp) => emp.id !== id);
-        return `Emp ${id} deleted successfully  `;
+        if (len === this.EmployeeData.length) {
+            throw new HttpException("User is not found", HttpStatus.NOT_FOUND)
+        } else {
+
+            return `Emp ${id} deleted successfully  `;
+        }
     };
 }

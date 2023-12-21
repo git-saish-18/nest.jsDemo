@@ -16,6 +16,6 @@ export class StudentModule implements NestModule {
         // consumer.apply(StudentMiddleWare, StudentClassBasedMiddleWaare).forRoutes({ path: "StudentSection/getStudents", method: RequestMethod.GET })
 
         // It's called for all  routes in our application means global middleware
-        consumer.apply(StudentMiddleWare, StudentClassBasedMiddleWaare).forRoutes({ path: "*", method: RequestMethod.ALL })
+        // consumer.apply(StudentMiddleWare, StudentClassBasedMiddleWaare).forRoutes({ path: "*", method: RequestMethod.ALL })
     }
 }

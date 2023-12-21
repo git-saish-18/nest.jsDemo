@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { Module, OnModuleInit } from "@nestjs/common";
 import { UserController } from "./Controllers/users.controllers";
 @Module({
     imports: [],
@@ -6,4 +6,8 @@ import { UserController } from "./Controllers/users.controllers";
     controllers: [UserController],
     exports: []
 })
-export class UsersModule { }
+export class UsersModule implements OnModuleInit {
+    onModuleInit() {
+        console.log("Users module initialized")
+    }
+}

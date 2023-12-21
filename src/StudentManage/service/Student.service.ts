@@ -22,8 +22,10 @@ export class StudentService {
     addStudent(studentData: StudentSchema) {
         try {
 
+
             this.StudentData.push(studentData);
             return `Student Id ${studentData.Id} added`
+            // return new Promise((resolve) => { setTimeout(() => { resolve(studentData.Id), 2000 }) })
         }
         catch (err) {
             return;

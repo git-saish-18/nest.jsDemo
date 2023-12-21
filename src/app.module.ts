@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, OnModuleInit } from '@nestjs/common';
 import { UsersModule } from './User/Users.module';
 import { EmployeeModule } from './Employee/Employee.module';
 import { CrudOperationModule } from './CrudOperation/CrudOperation.module';
@@ -11,16 +11,20 @@ const ROUTE = [{ path: 'users', module: UsersModule }, ...AllRoutes];
 
 @Module({
   imports: [
-    UsersModule,
     EmployeeModule,
     CrudOperationModule,
     AlbumsModule,
     StudentModule,
     RouterModule.register(ROUTE),
+    UsersModule,
 
   ],
   controllers: [],
   providers: [],
   exports: [],
 })
-export class AppModule { }
+export class AppModule implements OnModuleInit {
+  onModuleInit() {
+    console.log("App Module Init")
+  }
+}
