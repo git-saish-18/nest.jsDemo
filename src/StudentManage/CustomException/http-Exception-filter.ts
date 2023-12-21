@@ -15,6 +15,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
             error: exception.message,
             method: req.method,
             path: req.path,
+            timestamp: new Date().toISOString()
         }
         this.CreatLogFile(body);
         res.status(HttpStatus.NOT_FOUND).json(body);
