@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { StudentMiddleWare } from './StudentManage/middleware/Student-middleware';
-import { StudentInterceptor } from './User/Interceptors/Student.interceptor';
+import { StudentInterceptor } from './StudentManage/Interceptors/Student.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

@@ -4,7 +4,7 @@ import { StudentService } from "../service/Student.service";
 import { MyExceptionFilter } from "../CustomException/MyException-filter";
 import { HttpExceptionFilter } from "../CustomException/http-Exception-filter";
 import { Request } from "express";
-import { StudentInterceptor } from "src/User/Interceptors/Student.interceptor";
+import { StudentInterceptor } from "src/StudentManage/Interceptors/Student.interceptor";
 
 @Controller()
 // @UseInterceptors(StudentInterceptor)
