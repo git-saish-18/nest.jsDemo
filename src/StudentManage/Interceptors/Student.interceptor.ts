@@ -27,7 +27,7 @@ export class StudentInterceptor implements NestInterceptor {
       statusCode: res.statusCode,
     };
     // this.writeFiles(bodymsg);
-    req.body.saish = 'EndGamers';
+    // req.body.saish = 'EndGamers';
     console.log('Start Game changes REQ');
     // console.log(req.body)
     // this.Catche.push(req.body)

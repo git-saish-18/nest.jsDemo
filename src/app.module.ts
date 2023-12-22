@@ -12,9 +12,11 @@ import { ConfigModule } from '@nestjs/config';
 const ROUTE = [{ path: 'users', module: UsersModule }, ...AllRoutes];
 import { AllCofig } from './Config/AllCofig';
 import { DataBaseAlbum } from './Albums/AlbumConfig/DataBase.config';
+import { NewStudentDemoModule } from './NewStudentDemo/NewStudentDemo.module';
 
 @Module({
   imports: [
+    NewStudentDemoModule,
     EmployeeModule,
     CrudOperationModule,
     AlbumsModule,

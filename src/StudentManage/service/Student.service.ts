@@ -11,12 +11,17 @@ import {
     NotFoundException,
     Delete,
     Put,
+    Body,
+    UnauthorizedException,
 } from '@nestjs/common';
 import { StudentSchema } from '../dto/Student.dto';
 import { StudentDatas } from '../StudentEntity/Student.entity';
 // import { MyException } from "../CustomException/MyException";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { JwtService } from '@nestjs/jwt';
+
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class StudentService {
@@ -25,6 +30,7 @@ export class StudentService {
     constructor(
         @InjectRepository(StudentDatas)
         private readonly StudentDatase: Repository<StudentDatas>,
+        private jwtservice: JwtService,
     ) { }
     @Get('/getStudents')
     async getStudents(): Promise<StudentDatas[] | undefined> {
@@ -46,12 +52,38 @@ export class StudentService {
     @Post('/addStudent')
     async addStudent(studentData: StudentSchema): Promise<StudentDatas | undefined> {
         try {
-            return await this.StudentDatase.save(studentData);
+            const { Password } = studentData;
+            const salt = await bcrypt.genSalt(10);
+            const NewPass = await bcrypt.hash(Password, salt);
+            const NewUser = {
+                ...studentData,
+                Password: NewPass
+            }
+            const token = this.jwtservice.sign(NewUser);
+            console.log(NewPass, token)
+            return await this.StudentDatase.save(NewUser);
             // return new Promise((resolve) => { setTimeout(() => { resolve(studentData.Id), 2000 }) })
         } catch (err) {
             return;
         }
     }
+
+    @Post('/login')
+    async login(@Body() StudentLoginDetails: any): Promise<string> {
+        const UserExist = await this.StudentDatase.findBy({ EmailId: StudentLoginDetails.EmailId });
+        if (UserExist) {
+            const IsValid = await bcrypt.compare(StudentLoginDetails.Password, UserExist[0].Password);
+            if (!UserExist || !IsValid) {
+                throw new UnauthorizedException('Invalid Credentials');
+            }
+            else{
+                return `${UserExist[1].Name}`
+            }
+        }
+
+        return "";
+    }
+
     // @Post('/addStudentMultiRecord')
     // addStudentMultiRecord(studentData: StudentSchema[]) {
     //     studentData.forEach((ele) => {

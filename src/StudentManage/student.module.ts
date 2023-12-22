@@ -13,9 +13,14 @@ import { DB_config_PG } from './orm.config/orm.config';
 import { DataBaseConfig } from './orm.config/DataBase.config';
 import { ConfigModule } from '@nestjs/config';
 import { StudentDatas } from './StudentEntity/Student.entity';
+import { JwtModule } from '@nestjs/jwt';
+
 @Module({
   exports: [],
-  imports: [TypeOrmModule.forRoot(DB_config_PG), ConfigModule.forFeature(DataBaseConfig),TypeOrmModule.forFeature([StudentDatas])],
+  imports: [JwtModule.register({
+    secret: 'secret',
+    signOptions: { expiresIn: '1h' },
+  }), TypeOrmModule.forRoot(DB_config_PG), ConfigModule.forFeature(DataBaseConfig), TypeOrmModule.forFeature([StudentDatas])],
   providers: [StudentService],
   controllers: [StudentSectionController],
 

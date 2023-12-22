@@ -12,9 +12,13 @@ export class StudentDatas {
     Name: string;
 
     @Column({ type: 'varchar', nullable: false })
-    class: string;
+    Class: string;
 
     @Column({ type: 'varchar' })
     EmailId: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    Password: string;
+
 
 }

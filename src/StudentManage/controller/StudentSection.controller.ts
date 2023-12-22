@@ -64,4 +64,11 @@ export class StudentSectionController {
         await this.StudentService.deleteStudent(id);
         return "User deleted succefully";
     }
+
+
+    @Post('/login')
+    async login(@Body() StudentLoginDetails: any): Promise<string> {
+        return await this.StudentService.login(StudentLoginDetails);
+
+    }
 }

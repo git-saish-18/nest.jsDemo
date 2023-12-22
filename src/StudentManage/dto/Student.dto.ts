@@ -9,7 +9,7 @@ export class StudentSchema {
     Name: string;
 
     @IsEnum(['FY', 'SE', 'TE', "BE"], { message: "Class Should be belong to FY SE TE BE" })
-    class: string;
+    Class: string;
 
     @IsInt()
     @IsNotEmpty()
@@ -23,4 +23,10 @@ export class StudentSchema {
 
     @IsEmail()
     EmailId: string;
+
+
+    @IsString()
+    @Length(3, 10, { message: "string length is in between 3 to 10 character" })
+    // @IsNotEmpty({ message: "String should not empty" })
+    Password: string;
 }
