@@ -1,0 +1,4 @@
+npm install --save @nestjs/typeorm typeorm pg
+npm i -g @nestjs/cli
+nest new project-name
+npm i --save class-validator class-transformer

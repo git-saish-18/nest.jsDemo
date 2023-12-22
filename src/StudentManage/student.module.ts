@@ -8,11 +8,17 @@ import { StudentSectionController } from './controller/StudentSection.controller
 import { StudentService } from './service/Student.service';
 import { StudentMiddleWare } from './middleware/Student-middleware';
 import { StudentClassBasedMiddleWaare } from './middleware/Student-middleware';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DB_config_PG } from './orm.config/orm.config';
+import { DataBaseConfig } from './orm.config/DataBase.config';
+import { ConfigModule } from '@nestjs/config';
+import { StudentDatas } from './StudentEntity/Student.entity';
 @Module({
   exports: [],
-  imports: [],
+  imports: [TypeOrmModule.forRoot(DB_config_PG), ConfigModule.forFeature(DataBaseConfig),TypeOrmModule.forFeature([StudentDatas])],
   providers: [StudentService],
   controllers: [StudentSectionController],
+
 })
 export class StudentModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

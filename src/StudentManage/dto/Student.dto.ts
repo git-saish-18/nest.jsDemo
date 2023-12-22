@@ -10,16 +10,16 @@ export class StudentSchema {
 
     @IsEnum(['FY', 'SE', 'TE', "BE"], { message: "Class Should be belong to FY SE TE BE" })
     class: string;
-  
+
     @IsInt()
     @IsNotEmpty()
     // @Type(() => number)
     Id: number;
 
-    @IsNotEmpty()
-    @IsNumberString()
-    @Length(10, 10, { message: "Phone number is should be 10 digit" })
-    PhoneNumber: string;
+    // @IsNotEmpty()
+    // @IsString()
+    // @Length(10, 10, { message: "Phone number is should be 10 digit" })
+    // PhoneNumber: string;
 
     @IsEmail()
     EmailId: string;
