@@ -19,16 +19,18 @@ model Employee{
   mobileNumber  String
   joiningDate   String
   gender    genderEnum  
-  approved    approvedEnum
+  approved  approvedEnum
 }
+
+enum approvedEnum {
+  APPROVED
+  PENDING
+  REJECTED
+} 
 
 enum genderEnum {
   MALE
   FEMALE
-  T
+  OTHER
 }
 
-enum approvedEnum {
- Yes
- No
-}

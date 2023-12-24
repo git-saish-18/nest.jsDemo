@@ -1,5 +1,6 @@
 import { IsDate, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsNumberString, IsString, IsStrongPassword, Length } from "class-validator"
-
+import { genderEnum } from "@prisma/client"
+import { approvedEnum } from "@prisma/client"
 export class EmployeeDto {
 
     @IsNumber()
@@ -18,17 +19,22 @@ export class EmployeeDto {
     password: string
 
     @IsString()
-    dateOfBirth: Date
+    dateOfBirth: string
     @IsNotEmpty()
     @IsNumberString()
     @Length(10, 10, { message: "mobile number should be 10 character" })
     mobileNumber: string
     @IsString()
-    joiningDate: Date
+    joiningDate: string
     @IsString()
-    @IsEnum(['Male', 'Femal', "T"], { message: "This filed should be Male, Femal, T" })
+    @IsEnum(['MALE',
+        'FEMALE',
+        'OTHER'], { message: "This filed should be Male, Femal, T" })
     @IsNotEmpty()
-    gender: string
-    @IsEnum(['Yes', 'No'], { message: "This filed should be Yes or No " })
-    approved: string
+    gender: genderEnum
+    @IsEnum(['APPROVED'
+        , 'PENDING'
+        , 'REJECTED'], { message: "This filed should be Yes or No " })
+    approved: approvedEnum
 }
+
