@@ -36,5 +36,9 @@ export class EmployeeDto {
         , 'PENDING'
         , 'REJECTED'], { message: "This filed should be Yes or No " })
     approved: approvedEnum
+
+    @IsString()
+    token: string
+
 }
 

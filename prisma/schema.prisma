@@ -20,6 +20,8 @@ model Employee{
   joiningDate   String
   gender    genderEnum  
   approved  approvedEnum
+  token   String
+
 }
 
 enum approvedEnum {
