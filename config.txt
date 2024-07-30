@@ -1,0 +1,2 @@
+API_KEY=2dsssa21xsass
+SECRETE_KEY=saish@32
